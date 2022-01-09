@@ -60,11 +60,11 @@ public abstract class Media {
             throw new IllegalArgumentException("Suggester is null");
         }
 
-        return new SuggestedMedia(title, releaseDate, genre, suggester);
+        return new SuggestedMedia(this, suggester);
     }
 
     public ConfirmedMedia confirmMedia() {
-        return new ConfirmedMedia(title, releaseDate, genre);
+        return new ConfirmedMedia(this);
     }
 
     public void delete() {

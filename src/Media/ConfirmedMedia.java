@@ -1,17 +1,21 @@
 package Media;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ConfirmedMedia extends Media {
+public class ConfirmedMedia {
 
     private final Date confirmDate;
+    private final Media media;
     private final ArrayList<Score> scores = new ArrayList<>();
 
-    public ConfirmedMedia(String title, LocalDate releaseDate, String genre) {
-        super(title, releaseDate, genre);
+    public ConfirmedMedia(Media media) {
+        this.media = media;
         this.confirmDate = new Date();
+    }
+
+    public Media getMedia() {
+        return media;
     }
 
     public Date getConfirmDate() {

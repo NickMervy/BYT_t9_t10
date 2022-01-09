@@ -8,17 +8,17 @@ public class Score {
     private final LocalDate date;
     private String review;
     private final Account account;
-    private final ConfirmedMedia media;
+    private final ConfirmedMedia confirmedMedia;
 
-    public Score(int points, Account account, ConfirmedMedia media) {
-        if(account == null || media == null) {
+    public Score(int points, Account account, ConfirmedMedia confirmed) {
+        if(account == null || confirmed == null) {
             throw new IllegalArgumentException();
         }
         
         this.points = points;
         this.date = LocalDate.now();
         this.account = account;
-        this.media = media;
+        this.confirmedMedia = confirmed;
     }
 
     public int getPoints() {
@@ -49,8 +49,8 @@ public class Score {
         return account;
     }
 
-    public Media getMedia() {
-        return media;
+    public ConfirmedMedia getConfirmedMedia() {
+        return confirmedMedia;
     }  
 
     public void LinkExternalReview(String link) {
