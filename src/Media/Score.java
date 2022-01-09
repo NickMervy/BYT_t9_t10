@@ -8,9 +8,9 @@ public class Score {
     private final LocalDate date;
     private String review;
     private final Account account;
-    private final Media media;
+    private final ConfirmedMedia media;
 
-    public Score(int points, Account account, Media media) {
+    public Score(int points, Account account, ConfirmedMedia media) {
         if(account == null || media == null) {
             throw new IllegalArgumentException();
         }

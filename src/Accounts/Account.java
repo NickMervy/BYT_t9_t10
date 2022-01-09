@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import Media.Media;
 import Media.Score;
+import Media.SuggestedMedia;
 
 public abstract class Account {
     private static int accountIdCounter = 0;
@@ -15,8 +16,8 @@ public abstract class Account {
 
     protected final int accountId;
     protected final LocalDate dateCreated;
-    protected final ArrayList<Media> suggestedMedia = new ArrayList<>();
-    protected final ArrayList<Score> scoredMedia = new ArrayList<>();
+    protected final ArrayList<SuggestedMedia> suggestedMedia = new ArrayList<SuggestedMedia>();
+    protected final ArrayList<Score> scores = new ArrayList<Score>();
     protected String email;
     protected String password;
 

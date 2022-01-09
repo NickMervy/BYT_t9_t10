@@ -4,10 +4,10 @@ import org.junit.Test;
 import Accounts.Account;
 import Accounts.User;
 import Media.Book;
+import Media.ConfirmedMedia;
 import Media.Media;
 import Media.Score;
-import Media.Status.ConfirmedMedia;
-import Media.Status.SuggestedMedia;
+import Media.SuggestedMedia;
 
 import static org.junit.Assert.*;
 
@@ -57,21 +57,20 @@ public class MediaTests {
 		assertThrows(IllegalArgumentException.class, () -> testMedia.setReleaseDate(null));
 
 		Account testAccount = new User("abd@gmail.com", "123Test123.");
-		testMedia.suggestMedia(testAccount);
-        assertTrue(testMedia.getStatus() instanceof SuggestedMedia);
+		SuggestedMedia suggested = testMedia.suggestMedia(testAccount);
+        assertTrue(suggested instanceof SuggestedMedia);
 	}
 
 	@Test
 	public void ScoreMedia() {
-		testMedia.confirmMedia();
-		ConfirmedMedia confirmedMedia = (ConfirmedMedia)testMedia.getStatus();
-		assertThrows(IllegalArgumentException.class, () -> confirmedMedia.ScoreMedia(null));
+		ConfirmedMedia confirmed = testMedia.confirmMedia();
+		assertThrows(IllegalArgumentException.class, () -> confirmed.scoreMedia(null));
 
 		Account testAccount = new User("abd@gmail.com", "123Test123.");
-		confirmedMedia.ScoreMedia(new Score(100, testAccount, testMedia));
-		confirmedMedia.ScoreMedia(new Score(100, testAccount, testMedia));
-		confirmedMedia.ScoreMedia(new Score(100, testAccount, testMedia));
+		confirmed.scoreMedia(new Score(100, testAccount, confirmed));
+		confirmed.scoreMedia(new Score(100, testAccount, confirmed));
+		confirmed.scoreMedia(new Score(100, testAccount, confirmed));
 
-        assertEquals(300, confirmedMedia.AggregateScores());
+        assertEquals(300, confirmed.aggregateScores());
 	}
 }

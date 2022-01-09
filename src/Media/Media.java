@@ -4,17 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Accounts.Account;
-import Media.Status.ConfirmedMedia;
-import Media.Status.MediaStatus;
-import Media.Status.SuggestedMedia;
 
 public abstract class Media {
-    private static final ArrayList<Media> allMedia = new ArrayList<>();
+    private static final ArrayList<Media> allMedia = new ArrayList<Media>();
 
     protected String title;
     protected LocalDate releaseDate;
     protected String genre;
-    protected MediaStatus status;
     
     public Media(String title, LocalDate releaseDate, String genre) {
         setTitle(title);
@@ -59,20 +55,16 @@ public abstract class Media {
         this.genre = genre;
     }
 
-    public MediaStatus getStatus() {
-        return status;
-    }
-
-    public void suggestMedia(Account suggester) {
+    public SuggestedMedia suggestMedia(Account suggester) {
         if(suggester == null) {
             throw new IllegalArgumentException("Suggester is null");
         }
 
-        this.status = new SuggestedMedia(this, suggester);
+        return new SuggestedMedia(title, releaseDate, genre, suggester);
     }
 
-    public void confirmMedia() {
-        this.status = new ConfirmedMedia(this);
+    public ConfirmedMedia confirmMedia() {
+        return new ConfirmedMedia(title, releaseDate, genre);
     }
 
     public void delete() {

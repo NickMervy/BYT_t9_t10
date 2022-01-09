@@ -3,6 +3,7 @@ import org.junit.Test;
 import Accounts.Account;
 import Accounts.User;
 import Media.Book;
+import Media.ConfirmedMedia;
 import Media.Media;
 import Media.Score;
 
@@ -17,7 +18,7 @@ public class ScoreTests {
 		Account testAccount = new User("abd@gmail.com", "123Test123.");
 		Media testMedia = new Book("Fahrenheit 451", LocalDate.of(1953, 10, 19), "Dystopian", "Ray Bradbury", "Ppbooks");
 
-		assertThrows(IllegalArgumentException.class, () -> new Score(100, null, testMedia));
+		assertThrows(IllegalArgumentException.class, () -> new Score(100, null, testMedia.confirmMedia()));
 		assertThrows(IllegalArgumentException.class, () -> new Score(100, testAccount, null));
 		assertThrows(IllegalArgumentException.class, () -> new Score(100, null, null));
 	}
@@ -26,7 +27,7 @@ public class ScoreTests {
 	public void postReview() {
 		Account testAccount = new User("abd@gmail.com", "123Test123.");
 		Media testMedia = new Book("Fahrenheit 451", LocalDate.of(1953, 10, 19), "Dystopian", "Ray Bradbury", "Ppbooks");
-		Score testScore = new Score(100, testAccount, testMedia);
+		Score testScore = new Score(100, testAccount, testMedia.confirmMedia());
 
 		assertThrows(IllegalArgumentException.class, () -> testScore.postReview(""));
 		assertThrows(IllegalArgumentException.class, () -> testScore.postReview("   "));

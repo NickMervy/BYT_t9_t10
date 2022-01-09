@@ -1,18 +1,16 @@
-package Media.Status;
+package Media;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Media.Media;
-import Media.Score;
-
-public class ConfirmedMedia extends MediaStatus {
+public class ConfirmedMedia extends Media {
 
     private final Date confirmDate;
     private final ArrayList<Score> scores = new ArrayList<>();
 
-    public ConfirmedMedia(Media media) {
-        super(media);
+    public ConfirmedMedia(String title, LocalDate releaseDate, String genre) {
+        super(title, releaseDate, genre);
         this.confirmDate = new Date();
     }
 
@@ -20,15 +18,13 @@ public class ConfirmedMedia extends MediaStatus {
         return confirmDate;
     }
 
-    @Override
-    public long AggregateScores() {
+    public long aggregateScores() {
         return scores.stream()
                     .mapToLong(s -> s.getPoints())
                     .sum();
     }
 
-    @Override
-    public void ScoreMedia(Score score) {
+    public void scoreMedia(Score score) {
         if(score == null) {
             throw new IllegalArgumentException();
         }
